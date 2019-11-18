@@ -1,10 +1,12 @@
 {
-  "name": "oclif",
-  "description": "oclif: create your own CLI",
-  "version": "1.14.2",
-  "author": "Jeff Dickey @jdxcode",
-  "bin": "./bin/run",
-  "bugs": "https://github.com/oclif/oclif/issues",
+  "name": "tellmeajoke",
+  "description": "tellmeajoke Utility CLI",
+  "version": "0.0.0",
+  "author": "@mahmoudgad94",
+  "bin": {
+    "tellmeajoke": "./bin/run"
+  },
+  "bugs": "https://github.com/mahmoudgad94/tellmeajoke/issues",
   "dependencies": {
     "@oclif/command": "^1.5.8",
     "@oclif/config": "^1.12.6",
@@ -50,12 +52,12 @@
     "node": ">=8.0.0"
   },
   "files": [
-    ".oclif.manifest.json",
     "/bin",
     "/lib",
-    "/templates"
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/oclif/oclif",
+  "homepage": "https://github.com/mahmoudgad94/tellmeajoke",
   "keywords": [
     "oclif"
   ],
@@ -63,21 +65,18 @@
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
+    "bin": "tellmeajoke",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-warn-if-update-available",
-      "@oclif/plugin-not-found"
-    ],
-    "bin": "oclif"
+      "@oclif/plugin-help"
+    ]
   },
-  "repository": "oclif/oclif",
+  "repository": "mahmoudgad94/tellmeajoke",
   "scripts": {
-    "lint": "nps lint",
-    "postpack": "rm .oclif.manifest.json",
-    "posttest": "yarn run lint",
-    "prepack": "rm -rf lib && tsc && oclif-dev manifest",
-    "version": "oclif-dev readme && git add README.md",
-    "test": "nps test"
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "tslint -p test -t stylish",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"
 }
